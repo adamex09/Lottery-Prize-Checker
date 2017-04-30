@@ -22,10 +22,10 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok", function(e
 
   var $ = cheerio.load(body);
 
-  $('div#siteTable > div.link').each(function( index ) {
+  $('div.grid game-details top-banner-text').each(function( index ) {
     var prize = $(this).find('div.expected-price').text().trim();
     console.log("Prize: " + prize);
-    fs.appendFileSync('reddit.txt', title + '\n' + score + '\n' + user + '\n');
+    fs.appendFileSync('prize.txt', prize);
   });
 
 });
