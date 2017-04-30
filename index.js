@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
 var prize_amount = [];
-var regex = /[\d|,|.|e|E|\+]+/g;
+var regex = /[\d|,|.|e|E|\+]+/;
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -28,7 +28,7 @@ request("https://bet.szerencsejatek.hu/jatekok/putto", function(error, response,
     prize_amount = prize.match(regex);
   });
 
-  prize_amount = prize_amount.replace( /,/g, "" );
+  prize_amount = prize_amount.replace(/,/,"");
   prize_amount = parseInt("prize_amount");
   console.log("Prize amount: " + prize_amount);
   if (prize_amount>1000) {
