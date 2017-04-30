@@ -22,7 +22,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok", function(e
 
   var $ = cheerio.load(body);
 
-  $('div.top-banner-container').each(function( index ) {
+  $('div.grid.game-details.top-banner-text').each(function( index ) {
     var prize = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize: " + prize);
     matches = prize.match(regex);
