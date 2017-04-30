@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
 var prize = "";
-var milliard = "milliárd";
+var milliard = "millió";
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -14,7 +14,7 @@ app.get('/', function(request, response) {
 })
 
 
-request("https://bet.szerencsejatek.hu/jatekok/putto", function(error, response, body) {
+request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(error, response, body) {
   if(error) {
     console.log("Error: " + error);
   }
