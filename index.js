@@ -10,8 +10,7 @@ const request = require('request');
 
 // Webserver parameter
 
-var port_number = server.listen(process.env.PORT || 3000);
-app.listen(port_number);
+var port = process.env.PORT || 8000
 
 
 // Starting our webserver and putting it all together
@@ -28,3 +27,7 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 app.get('/', function (req, res) {
     res.send('Hi, I am the lottery checker. Up and running!')
 })
+
+server.listen(port, function() {
+    console.log("App is running on port " + port);
+});
