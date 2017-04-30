@@ -7,7 +7,9 @@ const fetch = require('node-fetch');
 const request = require('request');
 
 // Webserver parameter
-const PORT = process.env.PORT || 8445;
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
 
 
 // Starting our webserver and putting it all together
