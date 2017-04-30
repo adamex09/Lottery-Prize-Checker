@@ -24,8 +24,10 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok", function(e
   $('div.grid').each(function( index ) {
     var prize = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize: " + prize);
+    var regex = /[\d|,|.|e|E|\+]+/g;
+    var matches = prize.match(regex);
   });
-
+  console.log("Prize (clean): " + matches);
 });
 
 
