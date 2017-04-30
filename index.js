@@ -2,7 +2,6 @@
 var express = require('express')
 var request = require('request');
 var cheerio = require('cheerio');
-var fs = require('fs');
 var app = express()
 
 
@@ -23,9 +22,8 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok", function(e
   var $ = cheerio.load(body);
 
   $('div.grid').each(function( index ) {
-    var prize = $(this).find('div.expected-price').text().trim();
+    var prize = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize: " + prize);
-    fs.appendFileSync('prize.txt', prize);
   });
 
 });
