@@ -27,12 +27,13 @@ request("https://bet.szerencsejatek.hu/jatekok/putto", function(error, response,
     console.log("Prize: " + prize);
     prize_amount = prize.match(regex);
   });
+
   prize_amount = prize_amount.replace( /,/g, "" );
-  var prize_amount = parseInt("prize_amount");
+  prize_amount = parseInt("prize_amount");
   console.log("Prize amount: " + prize_amount);
   if (prize_amount>1000) {
     console.log("Prize is bigger than 1 billion");
-  }
+  };
 
 });
 
