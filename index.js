@@ -14,7 +14,7 @@ app.get('/', function(request, response) {
 })
 
 
-request("https://www.reddit.com", function(error, response, body) {
+request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok", function(error, response, body) {
   if(error) {
     console.log("Error: " + error);
   }
@@ -23,12 +23,8 @@ request("https://www.reddit.com", function(error, response, body) {
   var $ = cheerio.load(body);
 
   $('div#siteTable > div.link').each(function( index ) {
-    var title = $(this).find('p.title > a.title').text().trim();
-    var score = $(this).find('div.score.unvoted').text().trim();
-    var user = $(this).find('a.author').text().trim();
-    console.log("Title: " + title);
-    console.log("Score: " + score);
-    console.log("User: " + user);
+    var prize = $(this).find('div.expected-price').text().trim();
+    console.log("Prize: " + prize);
     fs.appendFileSync('reddit.txt', title + '\n' + score + '\n' + user + '\n');
   });
 
