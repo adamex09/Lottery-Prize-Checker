@@ -3,8 +3,8 @@ var express = require('express')
 var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
-var prize_amount = [];
-var regex = /[\d|,|.|e|E|\+]+/g;
+var prize = "";
+var milliard = "milliárd";
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -25,18 +25,8 @@ request("https://bet.szerencsejatek.hu/jatekok/putto", function(error, response,
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     var prize = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize: " + prize);
-    prize_amount = prize.match(regex);
-    console.log("Prize (regex): " + prize);
   });
-
-  prize_amount = prize_amount.join();
-  console.log("Prize (join): " + prize_amount);
-  prize_amount = prize_amount.replace(/,/g,"");
-  console.log("Prize (replace): " + prize_amount);
-  prize_amount = parseInt("prize_amount");
-  console.log("Prize (int): " + prize_amount);
-  console.log("Prize amount: " + prize_amount);
-  if (prize_amount>1000) {
+  if (prize.includes(milliard)) {
     console.log("Prize is bigger than 1 billion");
   };
 
