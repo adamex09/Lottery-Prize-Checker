@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
 var prize_amount = [];
-var regex = /[\d|,|.|e|E|\+]+/;
+var regex = /[\d|,|.|e|E|\+]/;
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
