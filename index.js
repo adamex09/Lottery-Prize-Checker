@@ -1,33 +1,14 @@
-'use strict';
 
-// Messenger API integration for Taskfit
+var express = require('express')
+var app = express()
 
-const bodyParser = require('body-parser');
-const crypto = require('crypto');
-const express = require('express');
-const fetch = require('node-fetch');
-const request = require('request');
+app.set('port', (process.env.PORT || 5000))
+app.use(express.static(__dirname + '/public'))
 
-// Webserver parameter
-
-var port = process.env.PORT || 8000
-
-
-// Starting our webserver and putting it all together
-const app = express();
-app.use(({method, url}, rsp, next) => {
-  rsp.on('finish', () => {
-    console.log(`${rsp.statusCode} ${method} ${url}`);
-  });
-  next();
-});
-app.use(bodyParser.json({ verify: verifyRequestSignature }));
-
-// Index route
-app.get('/', function (req, res) {
-    res.send('Hi, I am the lottery checker. Up and running!')
+app.get('/', function(request, response) {
+  response.send('Lottery prize checker')
 })
 
-server.listen(port, function() {
-    console.log("App is running on port " + port);
-});
+app.listen(app.get('port'), function() {
+  console.log("Node app is running at localhost:" + app.get('port'))
+})
