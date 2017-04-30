@@ -28,7 +28,10 @@ request("https://bet.szerencsejatek.hu/jatekok/putto", function(error, response,
   });
   if (prize.includes(milliard)) {
     console.log("Prize is bigger than 1 billion");
-  };
+  } 
+  else {
+    console.log("Prize is smaller than 1 billion");
+  }
 
 });
 
