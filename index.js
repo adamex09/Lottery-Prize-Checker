@@ -24,13 +24,18 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize: " + prize);
-    console.log(prize.includes('millió'));
   });
   if (prize.includes('millió')) {
     console.log("Prize is bigger than 1 billion");
+    app.get('/', function(request, response) {
+    response.send('Prize is bigger than 1 billion')
+    });
   } 
   else {
     console.log("Prize is smaller than 1 billion");
+    app.get('/', function(request, response) {
+    response.send('Prize is smaller than 1 billion')
+    });
   }
 
 });
