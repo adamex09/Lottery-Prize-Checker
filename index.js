@@ -4,7 +4,6 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express()
 var prize = "";
-var milliard = "millió";
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -24,10 +23,10 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
 
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     var prize = $(this).find('div.expected-price > h3').text().trim();
-    prize.join();
     console.log("Prize: " + prize);
+    console.log(prize.includes('millió'));
   });
-  if (prize.includes(milliard)) {
+  if (prize.includes('millió')) {
     console.log("Prize is bigger than 1 billion");
   } 
   else {
