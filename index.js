@@ -27,7 +27,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   else {
     console.log("Prize is smaller than 1 billion");
     app.get('/', function (req, res) {
-      res.render('index', { title: 'Hey', message: 'Hello there!' })
+      res.render('index', { title: 'Lottery prize checker', message: 'Do not play!', prize: prize })
     })
   }
 
