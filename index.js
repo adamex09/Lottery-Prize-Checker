@@ -27,7 +27,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   else {
     console.log("Prize is smaller than 1 billion");
     app.get('/', function(request, response) {
-      response.send('Prize is smaller than 1 billion')
+      response.send("Várható Ötöslottó főnyeremény: " + prize + ", ez még nem éri meg! :)")
     })
   }
 
