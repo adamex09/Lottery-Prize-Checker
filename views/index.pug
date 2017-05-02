@@ -1,8 +1,11 @@
 html
 	head
 		title Lottónyeremény ellenőrző
-		link(href='/views/styles.css', rel='stylesheet')
 		link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700', rel='stylesheet')
+		style(type='text/css').
+           body {
+                background-color: #F5F5F5;
+            }
 	body
 		h1= message
 		h2= subline
