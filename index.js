@@ -34,7 +34,7 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   });
 });
 
-function check(prize5, prize6) {
+function check() {
   if (prize5.includes('milliárd') || prize6.includes('milliárd')){
     console.log("Prize is bigger than 1 billion");
   } 
