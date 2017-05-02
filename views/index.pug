@@ -2,10 +2,32 @@ html
 	head
 		title Lottónyeremény ellenőrző
 		link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700', rel='stylesheet')
+		link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
 		style(type='text/css').
 			body {
 				background-color: #F5F5F5;
 			}
+			h1 {
+				font-family: 'Source Sans Pro', sans-serif;
+				font-size: 36px;
+				font-weight: 700;
+				color: #474A69;
+				text-align: center;
+				margin-top: 20px;
+			}
+			h2 {
+				font-family: 'Source Sans Pro', sans-serif;
+				font-size: 18px;
+				font-weight: 300;
+				color: #474A69;
+				text-align: center;
+			}
+			.material-icons{
+				font-size: 64px;
+				color: #FFDD00;
+				margin-top: 200px;
+			}
 	body
+		i.material-icons hourglass_empty
 		h1= message
 		h2= subline
