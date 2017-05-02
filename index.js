@@ -41,7 +41,7 @@ function check(prize5, prize6) {
   else {
     console.log("Prize is smaller than 1 billion");
     app.get('/', function (req, res) {
-      res.render('index', { message: 'Ejj, ráérünk arra még!', prize: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig' + prize6 })
+      res.render('index', { message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig' + prize6 })
     })
   }
 }
