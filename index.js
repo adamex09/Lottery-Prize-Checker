@@ -8,10 +8,6 @@ var prize = "";
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
-app.get('/', function(request, response) {
-  response.send('Lottery prize checker')
-})
-
 
 request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(error, response, body) {
   if(error) {
@@ -30,6 +26,9 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   } 
   else {
     console.log("Prize is smaller than 1 billion");
+    app.get('/', function(request, response) {
+      response.send('Prize is smaller than 1 billion')
+    })
   }
 
 });
