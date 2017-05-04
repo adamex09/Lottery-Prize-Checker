@@ -54,22 +54,18 @@ function check() {
   } 
   else {
     console.log("Prizes are smaller than 1 billion");
+    sendmail({
+      from: 'play@lottery-prize-checker.herokuapp.com',
+      to: 'hello@adamhornyak.com',
+      subject: 'Ejj, ráérünk arra még!',
+      html: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
+    });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
     })
   }
 }
 check(prize5, prize6)
-//Email küldés
-sendmail({
-    from: 'no-reply@yourdomain.com',
-    to: 'hello@adamhornyak.com, test@sohu.com, test@163.com ',
-    subject: 'test sendmail',
-    html: 'Mail of test sendmail ',
-  }, function(err, reply) {
-    console.log(err && err.stack);
-    console.dir(reply);
-});
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
