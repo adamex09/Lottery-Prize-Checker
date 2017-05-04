@@ -2,7 +2,7 @@
 var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-const sendmail = require('sendmail')();
+var sendmail = require('sendmail');
 var app = express();
 var prize5 = "";
 var prize6 = "";
@@ -57,7 +57,7 @@ function check() {
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
       to: 'hello@adamhornyak.com',
-      subject: prize5,
+      subject: 'Ejj, ráérünk arra még!',
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
     });
     app.get('/', function (req, res) {
