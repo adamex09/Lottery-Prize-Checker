@@ -55,9 +55,9 @@ function check() {
   else {
     console.log("Prizes are smaller than 1 billion");
     sendmail({
-      from: 'lottery-prize-checker@herokuapp.com',
+      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
       to: 'hello@adamhornyak.com',
-      subject: 'Ejj, ráérünk arra még!',
+      subject: prize5,
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
     });
     app.get('/', function (req, res) {
