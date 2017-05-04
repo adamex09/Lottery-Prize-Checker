@@ -59,6 +59,22 @@ function check() {
   }
 }
 check(prize5, prize6)
+//Email küldés
+let transporter = nodemailer.createTransport({
+    sendmail: true,
+    newline: 'unix',
+    path: '/node_modules/sendmail'
+});
+transporter.sendMail({
+    from: 'sender@example.com',
+    to: 'hello@adamhornyak.com.com',
+    subject: 'Lottó',
+    text: 'I hope this message gets delivered!'
+}, (err, info) => {
+    console.log(info.envelope);
+    console.log(info.messageId);
+});
+
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
