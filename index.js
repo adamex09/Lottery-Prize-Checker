@@ -2,7 +2,7 @@
 var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-var sendmail = require('sendmail');
+var sendmail = require('sendmail')();
 var app = express();
 var prize5 = "";
 var prize6 = "";
@@ -48,6 +48,12 @@ function check() {
   }
   if (prize5.includes('milliárd') && prize6.includes('milliárd')){
     console.log("Prize5 and Prize6 are bigger than 1 billion");
+    sendmail({
+      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
+      to: 'hello@adamhornyak.com',
+      subject: 'Duplán játszani kell!',
+      text: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.',
+    });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Duplán játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.' })
     })
@@ -59,10 +65,6 @@ function check() {
       to: 'hello@adamhornyak.com',
       subject: 'Ejj, ráérünk arra még!',
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
-      }, 
-      function(err, reply) {
-        console.log(err && err.stack);
-        console.dir(reply);
     });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
