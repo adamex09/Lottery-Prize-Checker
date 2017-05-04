@@ -2,6 +2,7 @@
 var express = require('express')
 var request = require('request');
 var cheerio = require('cheerio');
+var nodemailer = require('nodemailer');
 var app = express()
 var prize5 = "";
 var prize6 = "";
@@ -63,7 +64,7 @@ check(prize5, prize6)
 let transporter = nodemailer.createTransport({
     sendmail: true,
     newline: 'unix',
-    path: '/node_modules/sendmail'
+    path: '/usr/sbin/sendmail'
 });
 transporter.sendMail({
     from: 'sender@example.com',
