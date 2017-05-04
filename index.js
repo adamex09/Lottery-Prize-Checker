@@ -59,6 +59,10 @@ function check() {
       to: 'hello@adamhornyak.com',
       subject: 'Ejj, ráérünk arra még!',
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
+      }, 
+      function(err, reply) {
+        console.log(err && err.stack);
+        console.dir(reply);
     });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
@@ -66,7 +70,6 @@ function check() {
   }
 }
 check(prize5, prize6)
-sendmail()
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
