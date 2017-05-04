@@ -56,7 +56,7 @@ function check() {
     console.log("Prizes are smaller than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com, 0036205270070@mobilpost.no',
+      to: 'hello@adamhornyak.com',
       subject: 'Ejj, ráérünk arra még!',
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
     });
@@ -65,7 +65,6 @@ function check() {
     })
   }
 }
-check(prize5, prize6)
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
