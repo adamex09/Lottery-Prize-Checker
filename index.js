@@ -1,9 +1,9 @@
 //Változók és dependenciák
-var express = require('express')
+var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-const nodemailer = require('nodemailer');
-var app = express()
+const sendmail = require('sendmail')();
+var app = express();
 var prize5 = "";
 var prize6 = "";
 //App inicializálás
@@ -61,20 +61,15 @@ function check() {
 }
 check(prize5, prize6)
 //Email küldés
-let transporter = nodemailer.createTransport({
-    sendmail: true,
-    newline: 'unix',
-    path: '/usr/sbin/sendmail'
+sendmail({
+    from: 'no-reply@yourdomain.com',
+    to: 'hello@adamhornyak.com, test@sohu.com, test@163.com ',
+    subject: 'test sendmail',
+    html: 'Mail of test sendmail ',
+  }, function(err, reply) {
+    console.log(err && err.stack);
+    console.dir(reply);
 });
-transporter.sendMail({
-    from: 'sender@example.com',
-    to: 'hello@adamhornyak.com.com',
-    subject: 'Lottó',
-    text: 'I hope this message gets delivered!'
-}, (err, info) => {
-    console.log('Email sent!');
-});
-
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
