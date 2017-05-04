@@ -2,7 +2,7 @@
 var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-var sendmail = require('sendmail');
+
 var app = express();
 var prize5 = "";
 var prize6 = "";
@@ -66,6 +66,7 @@ function check() {
   }
 }
 check(prize5, prize6);
+var sendmail = require('sendmail')();
 sendmail({
   from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
   to: 'hello@adamhornyak.com',
