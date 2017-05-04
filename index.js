@@ -2,7 +2,7 @@
 var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-const sendmail = require('sendmail');
+var sendmail = require('sendmail');
 var app = express();
 var prize5 = "";
 var prize6 = "";
@@ -66,6 +66,7 @@ function check() {
   }
 }
 check(prize5, prize6)
+sendmail()
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
