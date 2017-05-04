@@ -48,12 +48,6 @@ function check() {
   }
   if (prize5.includes('milliárd') && prize6.includes('milliárd')){
     console.log("Prize5 and Prize6 are bigger than 1 billion");
-    sendmail({
-      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com',
-      subject: 'Duplán játszani kell!',
-      text: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.',
-    });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Duplán játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.' })
     })
@@ -62,7 +56,7 @@ function check() {
     console.log("Prizes are smaller than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com',
+      to: 'hello@adamhornyak.com, 0036205270070@mobilpost.no',
       subject: 'Ejj, ráérünk arra még!',
       text: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.',
     });
