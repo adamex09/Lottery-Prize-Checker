@@ -2,7 +2,7 @@
 var express = require('express')
 var request = require('request');
 var cheerio = require('cheerio');
-var nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 var app = express()
 var prize5 = "";
 var prize6 = "";
@@ -72,7 +72,7 @@ transporter.sendMail({
     subject: 'Lottó',
     text: 'I hope this message gets delivered!'
 }, (err, info) => {
-    console.log(info.envelope);
+    console.log('Email sent!');
     console.log(info.messageId);
 });
 
