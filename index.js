@@ -73,7 +73,6 @@ transporter.sendMail({
     text: 'I hope this message gets delivered!'
 }, (err, info) => {
     console.log('Email sent!');
-    console.log(info.messageId);
 });
 
 //Port figyelés
