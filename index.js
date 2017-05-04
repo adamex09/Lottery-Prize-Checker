@@ -65,7 +65,13 @@ function check() {
     })
   }
 }
-check(prize5, prize6)
+check(prize5, prize6);
+sendmail({
+  from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
+  to: 'hello@adamhornyak.com',
+  subject: 'Ejj, ráérünk arra még hee!',
+  text: 'Az Ötöslottó még csak ' + prize5 + ', a Hatoslottóé ' + prize6 + '.',
+});
 //Port figyelés
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
