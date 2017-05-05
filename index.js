@@ -91,7 +91,7 @@ function check() {
 check(prize5, prize6)
 
 //Email scheduler
-var j = schedule.scheduleJob({hour: 21, minute: 08 dayOfWeek: 5}, function(){
+var j = schedule.scheduleJob({hour: 21, minute: 8, dayOfWeek: 5}, function(){
   console.log('Scheduler is running!');
   check(prize5, prize6);
 });
