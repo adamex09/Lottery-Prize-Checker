@@ -48,7 +48,7 @@ function check() {
       text: 'Az Ötöslottó főnyereménye már 1 milliárd forint felett jár.',
     });
     app.get('/', function (req, res) {
-      res.render('index', { message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', de a Hatoslottóé még csak ' + prize6 + '.' })
+      res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', de a Hatoslottóé még csak ' + prize6 + '.' })
     })
   }
   if (prize6.includes('milliárd')){
@@ -60,7 +60,7 @@ function check() {
       text: 'A Hatoslottó főnyereménye már 1 milliárd forint felett jár.',
     });
     app.get('/', function (req, res) {
-      res.render('index', { message: 'Játszani kell!', subline: 'Az Hatoslottó eheti várható főnyereménye már ' + prize6 + ', de az Ötöslottóé még csak ' + prize5 + '.' })
+      res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Hatoslottó eheti várható főnyereménye már ' + prize6 + ', de az Ötöslottóé még csak ' + prize5 + '.' })
     })
   }
   if (prize5.includes('milliárd') && prize6.includes('milliárd')){
@@ -72,7 +72,7 @@ function check() {
       text: 'Az Ötöslottó és a Hatoslottó főnyereménye is 1 milliárd forint felett jár már.',
     });
     app.get('/', function (req, res) {
-      res.render('index', { message: 'Duplán megéri!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.' })
+      res.render('index', { icon: 'notifications_active', message: 'Duplán megéri!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.' })
     })
   } 
   else {
