@@ -77,6 +77,12 @@ function check() {
   } 
   else {
     console.log("Prizes are smaller than 1 billion");
+    sendmail({
+      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
+      to: 'hello@adamhornyak.com',
+      subject: 'Test',
+      text: 'Ne vedd meg!',
+    });
     app.get('/', function (req, res) {
       res.render('index', { message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
     })
@@ -85,8 +91,9 @@ function check() {
 check(prize5, prize6)
 
 //Email scheduler
-var j = schedule.scheduleJob({hour: 20, minute: 52, dayOfWeek: 5}, function(){
-  console.log('Time for tea!');
+var j = schedule.scheduleJob({hour: 21, minute: 08 dayOfWeek: 5}, function(){
+  console.log('Scheduler is running!');
+  check(prize5, prize6);
 });
 
 //Port listening
