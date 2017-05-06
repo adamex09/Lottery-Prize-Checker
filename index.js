@@ -77,7 +77,7 @@ function check() {
   } 
   else {
     console.log("Prizes are smaller than 1 billion");
-    console.log(prize5.includes('milli'));
+    console.log('milliárd'.includes('milli'));
     app.get('/', function (req, res) {
       res.render('index', { icon: 'hourglass_empty', message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
     })
