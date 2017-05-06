@@ -86,7 +86,7 @@ function check() {
     })
   }
 }
-check();
+setTimeout(check, 10000);
 
 //Email scheduler
 var j = schedule.scheduleJob({hour: 20, minute: 0, dayOfWeek: 1}, function(){
