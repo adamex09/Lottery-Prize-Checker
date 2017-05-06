@@ -51,7 +51,7 @@ function check() {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', de a Hatoslottóé még csak ' + prize6 + '.' })
     })
   }
-  if (prize6.includes('milliárd')){
+  else if (prize6.includes('milliárd')){
     console.log("Prize6 is bigger than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
@@ -63,7 +63,7 @@ function check() {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Hatoslottó eheti várható főnyereménye már ' + prize6 + ', de az Ötöslottóé még csak ' + prize5 + '.' })
     })
   }
-  if (prize5.includes('milliárd') && prize6.includes('milliárd')){
+  else if (prize5.includes('milliárd') && prize6.includes('milliárd')){
     console.log("Prize5 and Prize6 are bigger than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
