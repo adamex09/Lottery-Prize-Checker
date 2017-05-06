@@ -39,7 +39,7 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
 
 //Prize checker
 function check() {
-  if (prize5.includes('milliárd')){
+  if (prize5.includes('milliárd') && (!(prize6.includes('milliárd')))){
     console.log("Prize5 is bigger than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
@@ -51,7 +51,7 @@ function check() {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', de a Hatoslottóé még csak ' + prize6 + '.' })
     })
   }
-  else if (prize6.includes('milliárd')){
+  else if (prize6.includes('milliárd')  && (!(prize5.includes('milliárd')))){
     console.log("Prize6 is bigger than 1 billion");
     sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
