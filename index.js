@@ -87,7 +87,7 @@ function check() {
 setTimeout(check, 5000);
 
 //Email scheduler
-var j = schedule.scheduleJob({hour: 21, minute: 59, dayOfWeek: 6}, function(){
+var j = schedule.scheduleJob({hour: 22, minute: 5, dayOfWeek: 6}, function(){
   console.log('Scheduler is running!');
   check();
 });
