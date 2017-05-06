@@ -5,8 +5,8 @@ var cheerio = require('cheerio');
 var sendmail = require('sendmail')();
 var schedule = require('node-schedule');
 var app = express();
-var prize5 = "";
-var prize6 = "";
+var prize5;
+var prize6;
 
 //App start
 app.set('view engine', 'pug')
@@ -21,7 +21,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize5value = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize5: " + prize5value);
+    console.log("Prize5value: " + prize5value);
     prize5 = prize5value;
   });
 });
@@ -34,7 +34,7 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize6value = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize6: " + prize6value);
+    console.log("Prize6value: " + prize6value);
     prize6 = prize6value;
   });
 });
