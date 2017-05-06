@@ -99,4 +99,4 @@ app.listen(app.get('port'), function() {
 var http = require("http");
 setInterval(function() {
     http.get("http://lottery-prize-checker.herokuapp.com");
-}, 3000000);
+}, 1500000);
