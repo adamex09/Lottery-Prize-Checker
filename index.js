@@ -5,8 +5,8 @@ var cheerio = require('cheerio');
 var sendmail = require('sendmail')();
 var schedule = require('node-schedule');
 var app = express();
-var prize5 = "";
-var prize6 = "";
+var window.prize5 = "";
+var window.prize6 = "";
 
 //App start
 app.set('view engine', 'pug')
