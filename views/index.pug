@@ -3,6 +3,7 @@ html
 		title Lottónyeremény Ellenőr
 		link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700', rel='stylesheet')
 		link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+		script(src='/index.js')
 		style(type='text/css').
 			body {
 				background-color: #F5F5F5;
@@ -34,7 +35,7 @@ html
 				left: 50%;
 				transform: translate(-50%,-50%);
 			}
-	body
+	body onload="check()";
 		i.material-icons= icon
 		h1= message
 		h2= subline
