@@ -24,6 +24,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
     console.log("Prize5value: " + prize5value);
   });
   prize5 = prize5value;
+  console.log("Prize5request" + prize5);
 });
 
 //Lotto 6 scrape
