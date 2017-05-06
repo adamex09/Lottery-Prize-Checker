@@ -20,10 +20,9 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   }
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
-    prize5value = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize5value: " + prize5value);
+    prize5 = $(this).find('div.expected-price > h3').text().trim();
+    console.log("Prize5: " + prize5);
   });
-  prize5 = prize5value;
 });
 
 //Lotto 6 scrape
@@ -33,10 +32,9 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   }
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
-    prize6value = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize6value: " + prize6value);
+    prize6 = $(this).find('div.expected-price > h3').text().trim();
+    console.log("Prize6: " + prize6);
   });
-  prize6 = prize6value;
 });
 
 //Prize checker
@@ -47,7 +45,7 @@ function check() {
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
       to: 'hello@adamhornyak.com',
       subject: 'Játszani kell!',
-      text: 'Az Ötöslottó főnyereménye már 1 milliárd forint felett jár.',
+      text: 'Az Ötöslottó főnyereménye már ' + prize5 + '!',
     });
     app.get('/', function (req, res) {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', de a Hatoslottóé még csak ' + prize6 + '.' })
@@ -59,7 +57,7 @@ function check() {
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
       to: 'hello@adamhornyak.com',
       subject: 'Játszani kell!',
-      text: 'A Hatoslottó főnyereménye már 1 milliárd forint felett jár.',
+      text: 'A Hatoslottó főnyereménye már ' + prize6 + '!',
     });
     app.get('/', function (req, res) {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Hatoslottó eheti várható főnyereménye már ' + prize6 + ', de az Ötöslottóé még csak ' + prize5 + '.' })
@@ -71,7 +69,7 @@ function check() {
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
       to: 'hello@adamhornyak.com',
       subject: 'Duplán megéri!',
-      text: 'Az Ötöslottó és a Hatoslottó főnyereménye is 1 milliárd forint felett jár már.',
+      text: 'Az Ötöslottó főnyereménye már ' + prize5 + ', és a Hatoslottónak is ' + prize6 + '!',
     });
     app.get('/', function (req, res) {
       res.render('index', { icon: 'notifications_active', message: 'Duplán megéri!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5 + ', és a Hatoslottóé is ' + prize6 + '.' })
@@ -86,12 +84,12 @@ function check() {
     })
   }
 }
-setTimeout(check, 10000);
+setTimeout(check, 5000);
 
 //Email scheduler
 var j = schedule.scheduleJob({hour: 20, minute: 0, dayOfWeek: 1}, function(){
   console.log('Scheduler is running!');
-  check(prize5, prize6);
+  check();
 });
 
 //Port listening
