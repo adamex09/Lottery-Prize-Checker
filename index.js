@@ -22,8 +22,8 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize5value = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize5value: " + prize5value);
-    prize5 = prize5value;
   });
+  prize5 = prize5value;
 });
 
 //Lotto 6 scrape
@@ -35,8 +35,8 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize6value = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize6value: " + prize6value);
-    prize6 = prize6value;
   });
+  prize6 = prize6value;
 });
 
 //Prize checker
