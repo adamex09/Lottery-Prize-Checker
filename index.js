@@ -77,14 +77,11 @@ function check() {
   } 
   else {
     console.log("Prizes are smaller than 1 billion");
-    console.log(prize5.includes('milliárd'));
-    console.log("Prize5 else: " + prize5);
     app.get('/', function (req, res) {
       res.render('index', { icon: 'hourglass_empty', message: 'Ejj, ráérünk arra még!', subline: 'Az Ötöslottó eheti várható főnyereménye még csak ' + prize5 + ', a Hatoslottóé pedig ' + prize6 + '.' })
     })
   }
 }
-setTimeout(check, 5000);
 
 //Email scheduler
 var j = schedule.scheduleJob({hour: 18, minute: 0, dayOfWeek: 1}, function(){
