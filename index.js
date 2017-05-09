@@ -19,9 +19,6 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     .on('row', function(row) {
       console.log(JSON.stringify(row));
     });
-    app.get('/db', function (req, res) {
-      res.send(JSON.stringify(row))
-    })
 });
 
 //App start
