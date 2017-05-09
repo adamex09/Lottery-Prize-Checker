@@ -20,7 +20,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
       console.log(JSON.stringify(row));
     });
     app.get('/db', function (req, res) {
-      res.send(row)
+      res.send(JSON.stringify(row))
     })
 });
 
