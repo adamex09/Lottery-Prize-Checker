@@ -38,12 +38,12 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
     console.log("Prize5-raw: " + prize5)
     if (prize5.includes('millió')) {
       prize5 = prize5.match(/[-]{0,1}[\d.]*[\d]+/g)
-      prize5 = prize5.substring(0, prize5.indexOf(','));
+      prize5 = prize5.toString().substring(0, prize5.indexOf(','));
       console.log("Prize5: " + prize5)
     }
     else if (prize5.includes('milliárd')) {
       prize5 = prize5.match(/[-]{0,1}[\d.]*[\d]+/g)
-      prize5 = prize5.substring(0, prize5.indexOf(','));
+      prize5 = prize5.toString().substring(0, prize5.indexOf(','));
       console.log("Prize5: " + prize5)
     }
   });
