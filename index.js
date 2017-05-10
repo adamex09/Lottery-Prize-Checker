@@ -41,7 +41,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
       console.log("Prize5-1: " + prize5);
     }
     else if (prize5.includes('milliárd')) {
-      console.log("Prize5-2: " + prize5);
+      console.log("Prize5-2: " + prize5.replace(/[-]{0,1}[\d.]*[\d]+/g, ''));
     }
   });
 });
