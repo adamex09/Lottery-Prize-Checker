@@ -131,7 +131,7 @@ rule.hour = [0, new schedule.Range(1, 24)];
 rule.minute = [0, new schedule.Range(1, 60)];
 
 var j = schedule.scheduleJob(rule, function(){
-  console.log(rule.minute + 'm, email scheduler is running!');
+  console.log(minute + 'm, email scheduler is running!');
   send_emails();
 });
 
