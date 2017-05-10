@@ -120,8 +120,18 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 });
 
 //Email scheduler
-var j = schedule.scheduleJob({hour: 18, minute: 0, dayOfWeek: 1}, function(){
-  console.log('Email scheduler is running!');
+//var j = schedule.scheduleJob({hour: 20, minute: 41, dayOfWeek: 3}, function(){
+//  console.log(hour + 'h, email scheduler is running!');
+//  send_emails();
+//});
+
+var rule = new schedule.RecurrenceRule();
+rule.dayOfWeek = [0, new schedule.Range(1, 7)];
+rule.hour = [0, new schedule.Range(1, 24)];
+rule.minute = [0, new schedule.Range(1, 60)];
+
+var j = schedule.scheduleJob(rule, function(){
+  console.log(rule.minute + 'm, email scheduler is running!');
   send_emails();
 });
 
