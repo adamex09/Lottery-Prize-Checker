@@ -59,7 +59,7 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
         case 4:
           break;
       }
-      console.log("Prize5: " + prize5)
+      console.log("Prize5: " + prize5 + " millió Ft")
     }
   });
 });
@@ -73,6 +73,31 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize6 = $(this).find('div.expected-price > h3').text().trim();
     console.log("Prize6-raw: " + prize6);
+    if (prize6.includes('millió')) {
+      prize6 = prize6.match(/[-]{0,1}[\d.]*[\d]+/g)
+      prize6 = prize6.join()
+      prize6 = prize6.substring(0, prize6.indexOf(','));
+      console.log("Prize6: " + prize6)
+    }
+    else if (prize6.includes('milliárd')) {
+      prize6 = prize6.match(/[-]{0,1}[\d.]*[\d]+/g)
+      prize6 = prize6.join()
+      prize6 = prize6.replace(',','')
+      switch(prize6.length) {
+        case 1:
+          prize6 = prize6 + '000'
+          break;
+        case 2:
+          prize6 = prize6 + '00'
+          break;
+        case 3:
+          prize6 = prize6 + '0'
+          break;
+        case 4:
+          break;
+      }
+      console.log("Prize6: " + prize6 + " millió Ft")
+    }
   });
 });
 
