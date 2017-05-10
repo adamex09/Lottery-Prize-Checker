@@ -9,7 +9,7 @@ var app = express();
 var prize5 = '';
 var prize6 = '';
 var date = new Date();
-var NUMERIC_REGEXP = /[-]{0,1}[\d.]*[\d]+/g;
+var NUMERIC_REGEXP = ;
 
 //Database config
 pg.defaults.ssl = true;
@@ -35,13 +35,15 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   }
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
-    prize5 = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize5-raw: " + prize5);
+    prize5 = $(this).find('div.expected-price > h3').text().trim()
+    console.log("Prize5-raw: " + prize5)
     if (prize5.includes('millió')) {
-      console.log("Prize5: " + prize5.match(NUMERIC_REGEXP));
+      prize5.match(/[-]{0,1}[\d.]*[\d]+/g)
+      console.log("Prize5: " + prize5)
     }
     else if (prize5.includes('milliárd')) {
-      console.log("Prize5: " + prize5.match(NUMERIC_REGEXP));
+      prize5.match(/[-]{0,1}[\d.]*[\d]+/g)
+      console.log("Prize5: " + prize5)
     }
   });
 });
