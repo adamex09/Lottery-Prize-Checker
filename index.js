@@ -8,6 +8,7 @@ var pg = require('pg');
 var app = express();
 var prize5 = '';
 var prize6 = '';
+var date = new Date();
 
 //Database config
 pg.defaults.ssl = true;
@@ -126,12 +127,12 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.dayOfWeek = [0, new schedule.Range(1, 7)];
-rule.hour = [0, new schedule.Range(1, 24)];
-rule.minute = [0, new schedule.Range(1, 60)];
+rule.minute = 6;
 
 var j = schedule.scheduleJob(rule, function(){
-  console.log(JSON.stringify(rule.minute) + 'm, email scheduler is running!');
+  var hour = d.getHours();
+  var day = d.getDay();
+  console.log(hour + 'h, email scheduler is running!');
   send_emails();
 });
 
