@@ -9,12 +9,13 @@ var app = express();
 var prize5 = '';
 var prize6 = '';
 var date = new Date();
+var NUMERIC_REGEXP = /[-]{0,1}[\d.]*[\d]+/g;
 
 //Database config
 pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+  console.log('Connected to postgres! Getting users...');
   client
     .query('SELECT * FROM users;')
     .on('row', function(row) {
@@ -35,7 +36,15 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize5 = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize5: " + prize5);
+    console.log("Prize5-raw: " + prize5);
+    if (prize5.includes('millió')) {
+      prize5.match(NUMERIC_REGEXP);
+      console.log("Prize5: " + prize5);
+    };
+    else if (prize5.includes('milliárd')) {
+      prize5.match(NUMERIC_REGEXP);
+      console.log("Prize5: " + prize5);
+    }
   });
 });
 
@@ -47,7 +56,7 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize6 = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize6: " + prize6);
+    console.log("Prize6-raw: " + prize6);
   });
 });
 
