@@ -163,7 +163,7 @@ var j = schedule.scheduleJob(rule, function(){
   var hour = date.getHours();
   var day = date.getDay();
   console.log(hour + 'h, email scheduler is running!');
-  send_emails();
+//  send_emails();
 });
 
 //Port listening
