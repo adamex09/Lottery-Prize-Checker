@@ -67,10 +67,10 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
     if (prize6.includes('millió')) {
       prize6 = prize6raw.match(/[-]{0,1}[\d.]*[\d]+/g);
       prize6 = prize6.join();
-      if (prize6.includes(',')) {
-        prize6 = prize6.substring(0, prize6.indexOf(','));
-      };
-      console.log("Prize6: " + prize6)
+//      if (prize6.includes(',')) {
+//        prize6 = prize6.substring(0, prize6.indexOf(','));
+//      };
+      console.log("Prize6: " + prize6);
     }
     else if (prize6raw.includes('milliárd')) {
       prize6 = prize6raw.match(/[-]{0,1}[\d.]*[\d]+/g)
