@@ -119,7 +119,7 @@ function send_emails() {
   if (err) throw err;
   console.log('Connected to postgres! Getting users...');
   client
-    .query('SELECT * FROM users WHERE day =' + day)
+    .query('SELECT * FROM users WHERE day =' + day + 'AND hour =' + hour + 'AND '(' prize <=' + prize5 + 'OR prize <=' + prize6 ))
     .on('row', function(row) {
       console.log('Today: ' + JSON.stringify(row));
     });
