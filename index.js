@@ -116,16 +116,17 @@ setTimeout(prize_check, 5000);
 function send_emails() {
   pg.defaults.ssl = true;
   pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting users...');
-  client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
-    sendmail({
-      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: result.rows[0].email,
-      subject: 'Játszani kell!',
-      text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
+    if (err) throw err;
+    console.log('Connected to postgres! Getting users...');
+    client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
+      sendmail({
+        from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
+        to: result.rows[0].email,
+        subject: 'Játszani kell!',
+        text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
+      });
     });
-  });
+  })
 }
 
 //Send emails
@@ -175,7 +176,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 27;
+rule.minute = 30;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
