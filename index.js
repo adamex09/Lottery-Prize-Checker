@@ -118,16 +118,14 @@ function send_emails() {
   pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting users...');
-  client
-    .query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')')
-    .on('row', function(row) {
-      console.log('Found users: ' + JSON.stringify(row));
-      sendmail({
+  client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
+    console.log('name: %s and email: %s', result.rows[0].name, result.rows[0].email);
+      /*sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: row[0].email,
+      to: result.rows[0].email,
       subject: 'Játszani kell!',
       text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
-      });
+      });*/
     });
   });
 }
@@ -179,7 +177,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 52;
+rule.minute = 06;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
