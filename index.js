@@ -120,7 +120,8 @@ function send_emails() {
     console.log('Connected to postgres! Getting users...');
     client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
       for (var i = 0; i < (Object.keys(result.rows).length)/6; i++) {
-      console.log('name: %s and email: %s', result.rows[i].name, result.rows[i].email);
+        console.log('Length: '(Object.keys(result.rows).length)/6)
+        console.log('name: %s and email: %s', result.rows[i].name, result.rows[i].email);
         sendmail({
           from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
           to: result.rows[i].email,
@@ -179,7 +180,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 47;
+rule.minute = 52;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
