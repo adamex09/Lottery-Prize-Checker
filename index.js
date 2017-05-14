@@ -114,11 +114,16 @@ setTimeout(prize_check, 5000);
 
 //Send emails
 function send_emails() {
+  pg.defaults.ssl = true;
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting users...');
   client
     .query('SELECT * FROM users WHERE day=${day};')
     .on('row', function(row) {
       console.log('Today: ' + JSON.stringify(row));
     });
+  });
 }
 
 //Send emails
@@ -168,7 +173,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 43;
+rule.minute = 46;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
