@@ -126,7 +126,7 @@ function send_emails() {
     });
       sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: db_rowrow.email,
+      to: db_row.email,
       subject: 'Játszani kell!',
       text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
     });
@@ -180,7 +180,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 43;
+rule.minute = 45;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
