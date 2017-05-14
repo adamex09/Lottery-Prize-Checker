@@ -123,12 +123,12 @@ function send_emails() {
     .on('row', function(row) {
       console.log('Found users: ' + JSON.stringify(row));
       var db_row = JSON.parse(row);
-    });
       sendmail({
       from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: db_row.email,
+      to: db_row[0].email,
       subject: 'Játszani kell!',
       text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
+      });
     });
   });
 }
@@ -180,7 +180,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 45;
+rule.minute = 49;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
