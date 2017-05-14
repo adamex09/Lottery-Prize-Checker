@@ -172,7 +172,7 @@ rule.minute = 43;
 
 var j = schedule.scheduleJob(rule, function(){
   console.log(hour + 'h, email scheduler is running!');
-//  send_emails();
+  send_emails();
 });
 
 //Port listening
