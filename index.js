@@ -11,6 +11,8 @@ var prize6 = '';
 var prize5raw = '';
 var prize6raw = '';
 var date = new Date();
+var hour = date.getHours();
+var day = date.getDay();
 
 //Database config
 pg.defaults.ssl = true;
@@ -112,6 +114,15 @@ setTimeout(prize_check, 5000);
 
 //Send emails
 function send_emails() {
+  client
+    .query('SELECT * FROM users WHERE day=${day};')
+    .on('row', function(row) {
+      console.log('Today: ' + JSON.stringify(row));
+    });
+}
+
+//Send emails
+/*function send_emails() {
   if ((prize5 > 1000) && (prize6 < 1000)){
     console.log("Send: Prize5 is bigger than 1 billion");
     sendmail({
@@ -142,7 +153,7 @@ function send_emails() {
   else {
     console.log("Send: Prizes are smaller than 1 billion");
   }
-}
+}*/
 
 //Check scheduler
 var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
@@ -157,11 +168,9 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 //});
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 10;
+rule.minute = 43;
 
 var j = schedule.scheduleJob(rule, function(){
-  var hour = date.getHours();
-  var day = date.getDay();
   console.log(hour + 'h, email scheduler is running!');
 //  send_emails();
 });
