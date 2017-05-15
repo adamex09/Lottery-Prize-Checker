@@ -2,7 +2,7 @@
 var express = require('express');
 var request = require('request');
 var cheerio = require('cheerio');
-var sendmail = require('sendmail')();
+var sendmail = require('sendmail')({silent: true});
 var schedule = require('node-schedule');
 var pg = require('pg');
 var app = express();
@@ -117,67 +117,25 @@ function send_emails() {
   pg.defaults.ssl = true;
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
-    console.log('Connected to postgres! Getting users...');
     client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
       for (var i = 0; i < Object.keys(result.rows).length; i++) {
-        console.log('Length: ' +Object.keys(result.rows).length)
-        console.log('name: %s and email: %s', result.rows[i].name, result.rows[i].email);
+        console.log('Send to %s at %s', result.rows[i].name, result.rows[i].email);
         sendmail({
           from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
           to: result.rows[i].email,
           subject: 'Játszani kell!',
-          text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
-        });
+          text: 'Hello ' +result.rows[i].name+ '. Az Ötöslottó főnyereménye már ' + prize5raw + '!',
+        })
       }
-    });
-  });
+    })
+  })
 }
-
-//Send emails
-/*function send_emails() {
-  if ((prize5 > 1000) && (prize6 < 1000)){
-    console.log("Send: Prize5 is bigger than 1 billion");
-    sendmail({
-      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com',
-      subject: 'Játszani kell!',
-      text: 'Az Ötöslottó főnyereménye már ' + prize5raw + '!',
-    });
-  }
-  else if ((prize6 > 1000)  && (prize5 < 1000)){
-    console.log("Send: Prize6 is bigger than 1 billion");
-    sendmail({
-      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com',
-      subject: 'Játszani kell!',
-      text: 'A Hatoslottó főnyereménye már ' + prize6raw + '!',
-    });
-  }
-  else if ((prize5 > 1000) && (prize6 > 1000)){
-    console.log("Send: Prize5 and Prize6 are bigger than 1 billion");
-    sendmail({
-      from: 'Lottónyeremény Ellenőr <lottery-prize-checker@herokuapp.com>',
-      to: 'hello@adamhornyak.com',
-      subject: 'Duplán megéri!',
-      text: 'Az Ötöslottó főnyereménye már ' + prize5raw + ', és a Hatoslottónak is ' + prize6raw + '!',
-    });
-  } 
-  else {
-    console.log("Send: Prizes are smaller than 1 billion");
-  }
-}*/
 
 //Check scheduler
 var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
   console.log('Check scheduler is running!');
   prize_check();
 });
-
-//Email scheduler
-//var j = schedule.scheduleJob({hour: 20, minute: 41, dayOfWeek: 3}, function(){
-//  console.log(hour + 'h, email scheduler is running!');
-//  send_emails();
-//});
 
 var rule = new schedule.RecurrenceRule();
 rule.minute = 57;
