@@ -138,11 +138,10 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 0;
+rule.minute = 11;
 
 var j = schedule.scheduleJob(rule, function(){
   var hour = date.getHours();
-  var day = date.getDay();
   console.log(hour + 'h, email scheduler is running!');
   send_emails();
 });
