@@ -138,7 +138,7 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 29;
+rule.minute = 40;
 
 var j = schedule.scheduleJob(rule, function(){
   var hour = date.getHours();
