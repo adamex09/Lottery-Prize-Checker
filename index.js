@@ -11,6 +11,8 @@ var prize6 = '';
 var prize5raw = '';
 var prize6raw = '';
 var date = new Date();
+var hour;
+var day;
 
 //Database config
 pg.defaults.ssl = true;
@@ -115,8 +117,8 @@ function send_emails() {
   pg.defaults.ssl = true;
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
-    var hour = date.getHours();
-    var day = date.getDay();
+    hour = date.getHours();
+    day = date.getDay();
     client.query('SELECT * FROM users WHERE day = '+day+' AND hour = '+hour+' AND (prize <= '+prize5+' OR prize <='+prize6+')', function(err, result) {
       for (var i = 0; i < Object.keys(result.rows).length; i++) {
         console.log('Send to %s at %s', result.rows[i].name, result.rows[i].email);
@@ -138,10 +140,10 @@ var j = schedule.scheduleJob({hour: 10, minute: 0, dayOfWeek: 1}, function(){
 });
 
 var rule = new schedule.RecurrenceRule();
-rule.minute = 40;
+rule.minute = 1;
 
 var j = schedule.scheduleJob(rule, function(){
-  var hour = date.getHours();
+  hour = date.getHours();
   console.log(hour + 'h, email scheduler is running!');
   send_emails();
 });
