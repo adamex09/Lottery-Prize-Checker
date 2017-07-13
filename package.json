@@ -1,7 +1,7 @@
 {
   "name": "nodejs",
   "engines": {
-    "node": "6.2.2"
+    "node": "6.11.1"
   },
   "version": "1.0.0",
   "description": "",
