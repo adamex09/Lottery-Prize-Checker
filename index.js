@@ -82,7 +82,13 @@ request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function
 
 //Prize checker
 function prize_check() {
-  if ((prize5 > 1000) && (prize6 < 1000)){
+  if ((prize5 > 1000) && (prize6 > 1000)){
+    console.log("Check: Prize5 and Prize6 are bigger than 1 billion");
+    app.get('/', function (req, res) {
+      res.render('index', { icon: 'notifications_active', message: 'Duplán megéri!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5raw + ', és a Hatoslottóé is ' + prize6raw + '.' })
+    })
+  }
+  else if ((prize5 > 1000) && (prize6 < 1000)){
     console.log("Check: Prize5 is bigger than 1 billion");
     app.get('/', function (req, res) {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5raw + ', de a Hatoslottóé még csak ' + prize6raw + '.' })
@@ -94,12 +100,6 @@ function prize_check() {
       res.render('index', { icon: 'notifications_active', message: 'Játszani kell!', subline: 'Az Hatoslottó eheti várható főnyereménye már ' + prize6raw + ', de az Ötöslottóé még csak ' + prize5raw + '.' })
     })
   }
-  else if ((prize5 > 1000) && (prize6 > 1000)){
-    console.log("Check: Prize5 and Prize6 are bigger than 1 billion");
-    app.get('/', function (req, res) {
-      res.render('index', { icon: 'notifications_active', message: 'Duplán megéri!', subline: 'Az Ötöslottó eheti várható főnyereménye már ' + prize5raw + ', és a Hatoslottóé is ' + prize6raw + '.' })
-    })
-  } 
   else {
     console.log("Check: Prizes are smaller than 1 billion");
     app.get('/', function (req, res) {
