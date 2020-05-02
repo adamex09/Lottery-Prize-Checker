@@ -1,10 +1,10 @@
 //Variables and dependencies
 var express = require('express');
-var request = require('request');
 var cheerio = require('cheerio');
 var sendmail = require('sendmail')({silent: true});
 var schedule = require('node-schedule');
 var pg = require('pg');
+const got = require('got');
 var app = express();
 var prize5 = '';
 var prize6 = '';
@@ -29,10 +29,16 @@ app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 //Lotto 5 scrape
-request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(error, response, body) {
-  if(error) {
-    console.log("Error: " + error);
-  }
+(async () => {
+  try {
+        const response = await got('https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/');
+        console.log(response.body);
+        //=> '<!doctype html> ...'
+    } catch (error) {
+        console.log(error.response.body);
+        //=> 'Internal server error ...'
+    }
+
   var $ = cheerio.load(body);
   $('div.grid.game-details.top-banner-text').each(function( index ) {
     prize5raw = $(this).find('div.expected-price > h3').text().trim()
@@ -55,30 +61,6 @@ request("https://bet.szerencsejatek.hu/jatekok/otoslotto/sorsolasok/", function(
 });
 
 //Lotto 6 scrape
-request("https://bet.szerencsejatek.hu/jatekok/hatoslotto/sorsolasok/", function(error, response, body) {
-  if(error) {
-    console.log("Error: " + error);
-  }
-  var $ = cheerio.load(body);
-  $('div.grid.game-details.top-banner-text').each(function( index ) {
-    prize6raw = $(this).find('div.expected-price > h3').text().trim();
-    console.log("Prize6raw: " + prize6raw);
-    if (prize6raw.includes('millió')) {
-      prize6 = prize6raw.match(/[-]{0,1}[\d.]*[\d]+/g);
-      prize6 = prize6.join();
-      if (prize6.includes(',')) {
-        prize6 = prize6.substring(0, prize6.indexOf(','));
-      };
-      console.log("Prize6: " + prize6);
-    }
-    else if (prize6raw.includes('milliárd')) {
-      prize6 = prize6raw.match(/[-]{0,1}[\d.]*[\d]+/g)
-      prize6 = prize6.join()
-      prize6 = Number(prize5.replace(',','.')) * 1000;
-      console.log("Prize6: " + prize6);
-    }
-  });
-});
 
 //Prize checker
 function prize_check() {
@@ -151,9 +133,3 @@ var j = schedule.scheduleJob(rule, function(){
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
-
-//Keep alive
-var http = require("http");
-setInterval(function() {
-    http.get("http://lottery-prize-checker.herokuapp.com");
-}, 1500000);
