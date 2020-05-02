@@ -17,7 +17,7 @@
     "express": "^4.17.1",
     "got": "^11.1.0",
     "node-fetch": "^1.7.3",
-    "pg": "6.1.5",
+    "pg": "8.0.3",
     "sendmail": "^1.6.1"
   },
   "devDependencies": {}
