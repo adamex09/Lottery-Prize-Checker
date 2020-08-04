@@ -153,7 +153,7 @@ app.listen(app.get('port'), function() {
 })
 
 //Keep alive
-var http = require("http");
-setInterval(function() {
-    http.get("http://lottery-prize-checker.herokuapp.com");
-}, 1500000);
+//var http = require("http");
+//setInterval(function() {
+//    http.get("http://lottery-prize-checker.herokuapp.com");
+//}, 1500000);
